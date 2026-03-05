@@ -1,0 +1,45 @@
+{
+  "name": "dex-skills",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist/",
+    "openclaw/",
+    "src/",
+    ".env.example"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./tool-definitions": "./dist/tool-definitions.json",
+    "./openapi": "./dist/openapi.json"
+  },
+  "bin": {
+    "dex-skills-mcp": "dist/mcp-server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "mcp": "tsx src/mcp-server.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@moonit/sdk": "^1.5.0",
+    "@solana/web3.js": "^1.98.0",
+    "@zoralabs/coins-sdk": "^0.4.6",
+    "bs58": "^6.0.0",
+    "clanker-sdk": "^4.2.14",
+    "ethers": "^6.13.0",
+    "tronweb": "^6.0.0",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

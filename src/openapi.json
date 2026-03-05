@@ -1,0 +1,174 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "dex-skills",
+    "version": "0.1.0",
+    "description": "Launch tokens, query info, and list tokens on 7 DEX launchpad platforms across 4 chains"
+  },
+  "paths": {
+    "/platforms": {
+      "get": {
+        "operationId": "dex_platforms",
+        "summary": "List available DEX launchpad platforms",
+        "responses": {
+          "200": {
+            "description": "List of platforms",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "platform": { "$ref": "#/components/schemas/Platform" },
+                      "chain": { "$ref": "#/components/schemas/Chain" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/launch": {
+      "post": {
+        "operationId": "dex_launch",
+        "summary": "Launch a new token on a DEX launchpad",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["platform", "privateKey", "name", "symbol"],
+                "properties": {
+                  "platform": { "$ref": "#/components/schemas/Platform" },
+                  "privateKey": { "type": "string", "description": "Private key for signing (base58 for Solana, hex for EVM/TRON). Used once, not stored." },
+                  "name": { "type": "string", "description": "Token name" },
+                  "symbol": { "type": "string", "description": "Token symbol/ticker" },
+                  "description": { "type": "string", "description": "Token description" },
+                  "imageUrl": { "type": "string", "description": "Token image URL" },
+                  "initialBuyAmount": { "type": "string", "description": "Initial buy amount in native currency" },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "twitter": { "type": "string" },
+                      "telegram": { "type": "string" },
+                      "website": { "type": "string" },
+                      "discord": { "type": "string" },
+                      "github": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Launch result",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LaunchResult" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/token/{platform}/{tokenAddress}": {
+      "get": {
+        "operationId": "dex_get_token",
+        "summary": "Get information about a specific token",
+        "parameters": [
+          { "name": "platform", "in": "path", "required": true, "schema": { "$ref": "#/components/schemas/Platform" } },
+          { "name": "tokenAddress", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token information",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TokenInfo" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tokens/{platform}": {
+      "get": {
+        "operationId": "dex_list_tokens",
+        "summary": "List recently launched tokens",
+        "parameters": [
+          { "name": "platform", "in": "path", "required": true, "schema": { "$ref": "#/components/schemas/Platform" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 20 } },
+          { "name": "sortBy", "in": "query", "schema": { "type": "string", "enum": ["marketCap", "createdAt", "volume", "price"], "default": "createdAt" } },
+          { "name": "sortOrder", "in": "query", "schema": { "type": "string", "enum": ["asc", "desc"], "default": "desc" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tokens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TokenInfo" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Platform": {
+        "type": "string",
+        "enum": ["pumpfun", "letsbonk", "moonshot", "zora", "clanker", "fourmeme", "sunpump"]
+      },
+      "Chain": {
+        "type": "string",
+        "enum": ["solana", "base", "bnb", "tron"]
+      },
+      "LaunchResult": {
+        "type": "object",
+        "properties": {
+          "platform": { "$ref": "#/components/schemas/Platform" },
+          "chain": { "$ref": "#/components/schemas/Chain" },
+          "tokenAddress": { "type": "string" },
+          "txHash": { "type": "string" },
+          "tokenName": { "type": "string" },
+          "tokenSymbol": { "type": "string" },
+          "creatorAddress": { "type": "string" },
+          "timestamp": { "type": "number" }
+        }
+      },
+      "TokenInfo": {
+        "type": "object",
+        "properties": {
+          "platform": { "$ref": "#/components/schemas/Platform" },
+          "chain": { "$ref": "#/components/schemas/Chain" },
+          "tokenAddress": { "type": "string" },
+          "name": { "type": "string" },
+          "symbol": { "type": "string" },
+          "description": { "type": "string" },
+          "imageUrl": { "type": "string" },
+          "creatorAddress": { "type": "string" },
+          "marketCap": { "type": "number" },
+          "price": { "type": "number" },
+          "priceUsd": { "type": "number" },
+          "totalSupply": { "type": "string" },
+          "holderCount": { "type": "integer" },
+          "bondingCurveProgress": { "type": "number" },
+          "isGraduated": { "type": "boolean" },
+          "liquidityUsd": { "type": "number" },
+          "volume24h": { "type": "number" },
+          "createdAt": { "type": "number" }
+        }
+      }
+    }
+  }
+}

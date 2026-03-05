@@ -1,0 +1,118 @@
+[
+  {
+    "name": "dex_platforms",
+    "description": "List available DEX launchpad platforms with their chains. Returns: [{platform, chain}]",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "dex_launch",
+    "description": "Launch a new token on a DEX launchpad platform. Requires a private key for signing the transaction (used once, not stored).",
+    "input_schema": {
+      "type": "object",
+      "required": ["platform", "privateKey", "name", "symbol"],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": ["pumpfun", "letsbonk", "moonshot", "zora", "clanker", "fourmeme", "sunpump"],
+          "description": "Target launchpad platform"
+        },
+        "privateKey": {
+          "type": "string",
+          "description": "Private key for signing (base58 for Solana, hex 0x for EVM, hex for TRON). Used once, not stored."
+        },
+        "name": {
+          "type": "string",
+          "description": "Token name"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Token symbol/ticker"
+        },
+        "description": {
+          "type": "string",
+          "description": "Token description"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Token image URL"
+        },
+        "initialBuyAmount": {
+          "type": "string",
+          "description": "Initial buy amount in native currency (SOL/ETH/BNB/TRX)"
+        },
+        "twitter": {
+          "type": "string",
+          "description": "Twitter/X URL"
+        },
+        "telegram": {
+          "type": "string",
+          "description": "Telegram URL"
+        },
+        "website": {
+          "type": "string",
+          "description": "Website URL"
+        },
+        "discord": {
+          "type": "string",
+          "description": "Discord URL"
+        },
+        "github": {
+          "type": "string",
+          "description": "GitHub URL"
+        }
+      }
+    }
+  },
+  {
+    "name": "dex_get_token",
+    "description": "Get information about a specific token on a DEX launchpad (price, marketCap, bondingCurveProgress, isGraduated, etc). No private key needed.",
+    "input_schema": {
+      "type": "object",
+      "required": ["platform", "tokenAddress"],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": ["pumpfun", "letsbonk", "moonshot", "zora", "clanker", "fourmeme", "sunpump"],
+          "description": "Platform to query"
+        },
+        "tokenAddress": {
+          "type": "string",
+          "description": "Token contract/mint address"
+        }
+      }
+    }
+  },
+  {
+    "name": "dex_list_tokens",
+    "description": "List recently launched tokens on a DEX launchpad platform. No private key needed.",
+    "input_schema": {
+      "type": "object",
+      "required": ["platform"],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": ["pumpfun", "letsbonk", "moonshot", "zora", "clanker", "fourmeme", "sunpump"],
+          "description": "Platform to query"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Number of tokens to return (default: 20)"
+        },
+        "sortBy": {
+          "type": "string",
+          "enum": ["marketCap", "createdAt", "volume", "price"],
+          "description": "Sort field (default: createdAt)"
+        },
+        "sortOrder": {
+          "type": "string",
+          "enum": ["asc", "desc"],
+          "description": "Sort order (default: desc)"
+        }
+      }
+    }
+  }
+]
