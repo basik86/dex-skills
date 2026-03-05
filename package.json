@@ -1,6 +1,11 @@
 {
   "name": "dex-skills",
   "version": "0.1.0",
+  "description": "Unified SDK for DEX launchpad platforms across Solana, Base, BNB, and TRON",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/basik86/dex-skills"
+  },
   "type": "module",
   "files": [
     "dist/",
