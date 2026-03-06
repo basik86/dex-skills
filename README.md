@@ -1,8 +1,16 @@
 # dex-skills
 
-Token launch and query SDK for 7 DEX launchpad platforms across Solana, Base, BNB Chain, and TRON.
+[![npm](https://img.shields.io/npm/v/dex-skills?color=cb3837&logo=npm)](https://www.npmjs.com/package/dex-skills)
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Solana](https://img.shields.io/badge/Solana-✓-9945ff?logo=solana&logoColor=white)](https://solana.com)
+[![Base](https://img.shields.io/badge/Base-✓-0052ff?logo=coinbase&logoColor=white)](https://base.org)
+[![BNB](https://img.shields.io/badge/BNB-✓-f0b90b?logo=binance&logoColor=white)](https://www.bnbchain.org)
+[![TRON](https://img.shields.io/badge/TRON-✓-ff0013?logo=tron&logoColor=white)](https://tron.network)
+[![website](https://img.shields.io/badge/docs-dex--skills.xyz-black)](https://dex-skills.xyz)
+![X](https://img.shields.io/badge/@dexskills-black?logo=x&logoColor=white)
 
-**[Documentation](https://dex-skills.xyz)** · **[npm](https://www.npmjs.com/package/dex-skills)**
+Token launch and query SDK for 7 DEX launchpad platforms across Solana, Base, BNB Chain, and TRON.
 
 | Platform | Chain | Launch | Token Info | List Tokens |
 |----------|-------|--------|------------|-------------|
@@ -87,6 +95,7 @@ await skill.launch({
   symbol: "TKN",                // required
   description: "...",           // optional
   imageUrl: "https://...",      // optional
+  bannerUrl: "https://...",     // optional, Moonshot only
   initialBuyAmount: "0.1",      // optional, in native currency (SOL/ETH/BNB/TRX)
   links: {                      // optional
     twitter: "https://x.com/...",
@@ -129,7 +138,7 @@ Add to your `.mcp.json`:
 }
 ```
 
-Exposes 4 tools: `dex_platforms`, `dex_launch`, `dex_get_token`, `dex_list_tokens`.
+Exposes 10 tools: `dex_platforms`, `dex_launch`, `dex_get_token`, `dex_list_tokens`, `dex_buy`, `dex_sell`, `dex_trending`, `dex_trade_history`, `dex_holders`, `dex_estimate_price`.
 
 RPC endpoints are read from environment variables. Private keys are passed per-request to `dex_launch` and never stored.
 
