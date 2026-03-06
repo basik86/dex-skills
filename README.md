@@ -2,6 +2,8 @@
 
 Token launch and query SDK for 7 DEX launchpad platforms across Solana, Base, BNB Chain, and TRON.
 
+**[Documentation](https://dex-skills.xyz)** · **[npm](https://www.npmjs.com/package/dex-skills)**
+
 | Platform | Chain | Launch | Token Info | List Tokens |
 |----------|-------|--------|------------|-------------|
 | Pump.fun | Solana | Yes | Yes | Yes |
