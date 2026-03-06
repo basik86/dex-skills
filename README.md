@@ -12,6 +12,8 @@
 
 Token launch and query SDK for 7 DEX launchpad platforms across Solana, Base, BNB Chain, and TRON.
 
+`ca: 8UmPP5hLCLBrgZnznMGefXJSJCjYzbX1eDzpnZ9Cpump`
+
 | Platform | Chain | Launch | Token Info | List Tokens |
 |----------|-------|--------|------------|-------------|
 | Pump.fun | Solana | Yes | Yes | Yes |
