@@ -8,7 +8,7 @@
 [![BNB](https://img.shields.io/badge/BNB-✓-f0b90b?logo=binance&logoColor=white)](https://www.bnbchain.org)
 [![TRON](https://img.shields.io/badge/TRON-✓-ff0013?logo=tron&logoColor=white)](https://tron.network)
 [![website](https://img.shields.io/badge/docs-dex--skills.xyz-black)](https://dex-skills.xyz)
-![X](https://img.shields.io/badge/@dexskills-black?logo=x&logoColor=white)
+[![X](https://img.shields.io/badge/@Dexskills__-black?logo=x&logoColor=white)](https://x.com/Dexskills_)
 
 Token launch and query SDK for 7 DEX launchpad platforms across Solana, Base, BNB Chain, and TRON.
 
